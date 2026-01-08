@@ -77,22 +77,11 @@ This project transforms a standard CC/CV charger into a production-ready chargin
 
 The balancer uses a TL431 shunt reference driving an N-MOSFET to bleed current from cells exceeding the threshold voltage.
 
-**Per-Channel Topology:**
-```
-Cell+ ──┬── R_div_top (4.32kΩ) ──┬── TL431 Ref ── Gate
-        │                        │       │
-        │                 R_div_bot (10kΩ)│
-        │                        │       │
-        └── Bleed R (82Ω) ── MOSFET Drain
-                                 │
-Cell- ──────────────────────────┴───────┘
-```
-
 **Key Parameters:**
 - Threshold voltage: 3.55-3.60V (triggers before 3.65V max)
 - Bleed current: ~40mA per cell (adjustable via resistor selection)
-- MOSFET: AO3400 (SOT-23, low Rds_on)
-- Bleed resistor: 82Ω, 0.5-1W (range: 68-150Ω for different currents)
+- MOSFET: AO3400 
+- Bleed resistor: 10Ω, 5W
 
 ### Data Logging Harness
 
@@ -149,20 +138,13 @@ Produces a PDF validation report with annotated plots and pass/fail criteria.
 
 ## Test Procedures
 
-### Pre-Power Sanity (No Cells)
-
-1. Visual inspection: polarity, component orientation, solder joints
-2. Continuity check: no shorts between adjacent balance pins
-3. Apply 24V input, current-limited to 0.5A
-4. Verify telemetry reads sensible values (V≈0, I≈0)
-
 ### Incremental Bring-Up
 
 | Phase | Current | Duration | Checks |
 |-------|---------|----------|--------|
 | 1 | 1A | 5 min | Stability, no thermal anomalies |
 | 2 | 2A | 10 min | Temperature rise acceptable |
-| 3 | 3-4A | Full cycle | CC→CV transition, balancing |
+| 3 | 3-4A | Full cycle | CC to CV transition, balancing |
 
 ### Balancing Characterization
 
@@ -175,9 +157,9 @@ Produces a PDF validation report with annotated plots and pass/fail criteria.
 
 | Fault | Expected Behavior | Result |
 |-------|-------------------|--------|
-| NTC short/open | Charger halts | ✓ |
-| Pack disconnect mid-charge | Graceful fault, no damage | ✓ |
-| Input brownout | Orderly recovery, no latch-up | ✓ |
+| NTC short/open | Charger halts | Done |
+| Pack disconnect mid-charge | Graceful fault, no damage | Done |
+| Input brownout | Orderly recovery, no latch-up | Done |
 
 ## Bill of Materials
 
@@ -190,9 +172,9 @@ Produces a PDF validation report with annotated plots and pass/fail criteria.
 ### Balancer PCB (per channel, ×4)
 | Item | Value | Package | Notes |
 |------|-------|---------|-------|
-| Shunt reference | TL431 / LMV431 | SOT-23 | |
+| Shunt reference | TL431 | SOT-23 | |
 | N-MOSFET | AO3400 | SOT-23 | |
-| Bleed resistor | 82Ω | 1206/0805, 0.5-1W | Adjust for I_bleed |
+| Bleed resistor | 10Ω | 1206/0805, 5W | Adjust for I_bleed |
 | Divider top | 4.32kΩ | 0603 | Sets threshold |
 | Divider bottom | 10kΩ | 0603 | |
 | Filter cap | 10-47nF | 0603 | Optional |
@@ -210,38 +192,7 @@ Produces a PDF validation report with annotated plots and pass/fail criteria.
 | TVS diode | SMBJ36A | 1 |
 | Fuse | 15-20A blade | 1 |
 
-## Safety Considerations
-
-> ⚠️ **Warning**: This project involves high currents, stored energy, and hot surfaces. Follow all safety guidelines.
-
-- Use an isolated bench PSU with current limiting
-- Place TVS protection across the pack harness
-- Test in a fire-safe area (LiFePO₄ is safer but still requires caution)
-- Never leave charging unattended during development
-- Start all tests at reduced current before scaling up
-- Keep a fire extinguisher (Class D or CO₂) nearby
-
-## Results Gallery
-
-*Add photos and screenshots here:*
-- [ ] Assembled balancer PCB
-- [ ] Complete test setup
-- [ ] CC/CV transition plot
-- [ ] Cell convergence plot
-- [ ] Thermal camera image (optional)
-
-## Future Improvements
-
-- [ ] Active balancing topology for faster equalization
-- [ ] Bluetooth data streaming to mobile app
-- [ ] PCB revision with integrated current sensing
-- [ ] Enclosure design for field deployment
-
 ## License
 
 This project is licensed under the MIT License - see [LICENSE](LICENSE) for details.
 
-## Acknowledgments
-
-- LiFePO₄ charging profiles based on manufacturer datasheets
-- TL431 application circuits from Texas Instruments reference designs
