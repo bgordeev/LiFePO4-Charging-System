@@ -39,38 +39,6 @@ This project transforms a standard CC/CV charger into a production-ready chargin
                                     [USB → PC → Reports]
 ```
 
-## Repository Structure
-
-```
-├── hardware/
-│   ├── balancer/
-│   │   ├── schematic/          # KiCad schematic files
-│   │   ├── pcb/                # PCB layout files
-│   │   ├── gerbers/            # Manufacturing files
-│   │   └── bom.csv             # Bill of materials
-│   └── harness/
-│       └── wiring-diagram.pdf  # Interconnect documentation
-├── firmware/
-│   ├── esp32-logger/           # Data logging firmware
-│   │   ├── src/
-│   │   ├── include/
-│   │   └── platformio.ini
-│   └── config/                 # Sensor calibration data
-├── software/
-│   ├── data-analysis/          # Python plotting scripts
-│   ├── report-generator/       # Automated PDF generation
-│   └── requirements.txt
-├── test/
-│   ├── procedures/             # Step-by-step test protocols
-│   ├── data/                   # Raw test logs (.csv)
-│   └── reports/                # Generated validation reports
-├── docs/
-│   ├── theory-of-operation.md
-│   ├── safety-guidelines.md
-│   └── images/
-└── README.md
-```
-
 ## Hardware Design
 
 ### Passive Balancer PCB
