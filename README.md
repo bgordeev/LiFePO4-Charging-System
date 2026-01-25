@@ -36,7 +36,7 @@ This project transforms a standard CC/CV charger into a production-ready chargin
      [4S LiFePO₄ Pack]  [Balancer PCB]  [Data Logger]
                                               │
                                               ▼
-                                    [USB → PC → Reports]
+                                    [USB -> PC -> Reports]
 ```
 
 ## Hardware Design
