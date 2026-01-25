@@ -2,9 +2,6 @@
 
 A complete battery charging system featuring a custom passive balancer PCB, real-time data logging, and automated validation tooling for 4-cell LiFePO₄ packs.
 
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Status](https://img.shields.io/badge/status-tested-brightgreen.svg)
-
 ## Overview
 
 This project transforms a standard CC/CV charger into a production-ready charging system with cell balancing and comprehensive telemetry. The system charges 4S LiFePO₄ packs (12.8V nominal) at 3-4A while actively balancing cells to within ≤20mV at end-of-charge.
