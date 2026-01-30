@@ -157,7 +157,4 @@ Produces a PDF validation report with annotated plots and pass/fail criteria.
 | TVS diode | SMBJ36A | 1 |
 | Fuse | 15-20A blade | 1 |
 
-## License
-
-This project is licensed under the MIT License - see [LICENSE](LICENSE) for details.
 
